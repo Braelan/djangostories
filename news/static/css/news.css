@@ -1,3 +1,7 @@
 html {
   font-size: 30px;
 }
+
+.nojax {
+  background: blue;
+}

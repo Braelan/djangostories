@@ -3,6 +3,9 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <script src="{%static 'libs/jquery.js'%}"></script>
+    <script src="{%static 'libs/underscore.js'%}"></script>
+    <script src="{%static 'libs/backbone.js'%}"></script>
     <link rel="stylesheet" href="{% static 'css/news.css' %}">
     <meta charset="utf-8">
     <title></title>
@@ -20,6 +23,7 @@ intermedia of the Southern Ocean and B. m. brevicauda (also known as the pygmy b
  </p>
  <br>
  <br>
+ <div class="nojax">
  {% for post in posts %}
    {{post.title}}
 
@@ -27,4 +31,8 @@ intermedia of the Southern Ocean and B. m. brevicauda (also known as the pygmy b
 
    {{post.text|linebreaks}}
  {% endfor %}
+ </div>
+
+ {% block content %}
+ {% endblock%}
 </html>
