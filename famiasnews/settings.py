@@ -61,11 +61,10 @@ DATABASES = {
 
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'newsdb',
-            'USER': 'root',
+            'NAME': 'famia$newsdb',
+            'USER': 'famia',
             'PASSWORD': 'booker',
-            'HOST': '',
-            'PORT': '',
+            'HOST': 'mysql.server',
         }
 
 }
