@@ -1,28 +1,8 @@
-<!DOCTYPE html>
-{% extends "news/post_list_results.html" %}
+<!-- {% extends "news/post_list_results.html" %} -->
 {% load staticfiles %}
-
-
-<html>
-  <head>
-    <script src="{%static 'libs/jquery.js'%}"></script>
-    <script src="{%static 'libs/underscore.js'%}"></script>
-    <script src="{%static 'libs/backbone.js'%}"></script>
-
-    <script src="{%static 'news/famiasnews.js'%}"></script>
-    <script src="{%static 'news/collections/posts.js'%}"></script>
-    <script src="{%static 'news/utils.js'%}"></script>
-    <script src="{%static 'news/models.js'%}"></script>
-    <script src="{%static 'news/views/posts_index.js'%}"></script>
-    <script src="{%static 'news/routes.js'%}"></script>
-
     <link rel="stylesheet" href="{% static 'css/news.css' %}">
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
+ <!-- {% block content %} -->
 
-  </body>
 <p>
 Long and slender,
 the blue whale's body can be various shades of bluish-grey dorsally and somewhat lighter underneath.[13]
@@ -41,21 +21,6 @@ intermedia of the Southern Ocean and B. m. brevicauda (also known as the pygmy b
 
    {{post.text|linebreaks}}
  {% endfor %}
+
+ <!-- {% endblock %} -->
  </div>
- <br>
- <br>
- {% block content %}
- okokok
- {% endblock %}
-  wow
- <br>
- <br>
-<span></span>
-
-<script type="text/javascript">
-  $(document).ready(function(){
-    FamiasNews.initialize();
-  });
-</script>
-
-</html>
