@@ -5,3 +5,6 @@ html {
 .nojax {
   background: blue;
 }
+ li {
+   background: green;
+ }
