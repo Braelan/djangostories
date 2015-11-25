@@ -15,9 +15,9 @@ FamiasNews.Collections.Posts = Backbone.Collection.extend({
         }
       })
     } else {
-      question.fetch();
+      post.fetch();
     }
-    return question;
+    return post;
   },
 
 })

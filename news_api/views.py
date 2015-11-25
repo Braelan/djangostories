@@ -1,8 +1,10 @@
 from django.shortcuts import get_object_or_404
 from django.shortcuts import get_list_or_404
+from django.core.urlresolvers import reverse
 from django.shortcuts import render
 from django.http import JsonResponse
 from rest_framework import views
+from rest_framework.response import Response
 from news.models import Post
 
 
@@ -23,15 +25,15 @@ def get(request):
 
 
 def get_post(request, pk):
-    post = get_object_or_404(Post.objects.all, pk)
-    postprejson = dict(id= post.id
+    post = get_object_or_404(Post.objects.all(), pk=pk)
+    print post
+    postprejson = dict(id= post.id, title=post.title,
+                       text=post.text,
+                    author=post.author.username,
+                    created_date = post.created_date,
+                    published_date=post.published_date
                    )
     return JsonResponse(postprejson)
-
-
-
-
-
 
 
 
