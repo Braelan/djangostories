@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+  <head>
+    <script src="{%static 'libs/jquery.js'%}"></script>
+    <script src="{%static 'libs/underscore.js'%}"></script>
+    <script src="{%static 'libs/backbone.js'%}"></script>
+
+    <script src="{%static 'news/famiasnews.js'%}"></script>
+    <script src="{%static 'news/models/post.js'%}"></script>
+    <script src="{%static 'news/collections/posts.js'%}"></script>
+    <script src="{%static 'news/utils.js'%}"></script>
+    <script src="{%static 'news/views/posts_index.js'%}"></script>
+    <script src="{%static 'news/routes.js'%}"></script>
+    <link rel="stylesheet" href="{% static 'css/news.css' %}">
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+ {% block content %}
+ {% endblock %}
+
+<span></span>
+<script type="text/javascript">
+  $(document).ready(function(){
+    FamiasNews.initialize();
+  });
+</script>
+</body>

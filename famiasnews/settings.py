@@ -37,6 +37,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'news',
+    'rest_framework',
+
 )
 
 MIDDLEWARE_CLASSES = (
@@ -59,42 +61,23 @@ WSGI_APPLICATION = 'famiasnews.wsgi.application'
 
 DATABASES = {
 
-        # 'default': {
-        #  'ENGINE': 'django.db.backends.mysql',
-        #  'NAME': 'famia$newsdb',
-        #  'USER': 'famia',
-        #  'PASSWORD': 'booker',
-        #  'HOST': 'mysql.server',
-        # },
         'default': {
-<<<<<<< HEAD
             'ENGINE': 'django.db.backends.mysql',
             'NAME': 'famia$newsdb',
             'USER': 'famia',
             'PASSWORD': 'booker',
             'HOST': 'mysql.server',
         }
-=======
-           'ENGINE': 'django.db.backends.mysql',
-           'NAME': 'newsdb',
-            'USER': 'root',
-            'PASSWORD': 'booker',
-            'HOST': '',
-            'PORT': '',
-                }
+#        'default': {
+#           'ENGINE': 'django.db.backends.mysql',
+#           'NAME': 'newsdb',
+#            'USER': 'root',
+#            'PASSWORD': 'booker',
+#            'HOST': '',
+#            'PORT': '',
+#                }
 
-
-        # 'development': {
-        #   'ENGINE': 'django.db.backends.mysql',
-        #   'NAME': 'newsdb',
-        #   'USER': 'root',
-        #   'PASSWORD': 'booker',
-        #   'HOST': '',
-        #   'PORT': '',
-        # }
->>>>>>> merging
-
-}
+          } 
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
