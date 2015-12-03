@@ -16,12 +16,14 @@ FamiasNews.Views.PostsIndex = Backbone.View.extend({
     var posts = this.collection
     if (posts.length > 0) {
       posts.each( function(post){
-        var $li = $("<li></li>")
-        $li.text(post.escape("title"))
+        var $li = $("<a></a>")
+        $li.text(post.escape("title"));
+        link = '#posts/' + post.escape("id");
+        $li.attr('href', link)
         this.$el.append($li)
       }.bind(this))
     }
-    // this.$el.html("Look out! from your posts index view");
+
     return this;
   }
 })

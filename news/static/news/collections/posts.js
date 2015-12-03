@@ -6,7 +6,6 @@ FamiasNews.Collections.Posts = Backbone.Collection.extend({
   getOrFetch: function(id) {
     var post = this.get(id)
     var posts = this;
-
     if (!post) {
       post = new FamiasNews.Models.Post({id:id});
       post.fetch({
