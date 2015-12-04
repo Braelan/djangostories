@@ -8,10 +8,23 @@ FamiasNews.Views.PostShow = Backbone.View.extend({
   },
 
   render: function() {
-     var model = this.collection.getOrFetch(this.id);
-     var body = this.model.escape('title');
-     this.$el.html(body);
+     $Article = this.makeArticle();
+     this.$el.empty().append($Article)
      return this;
+  },
+
+  makeArticle: function() {
+    var model = this.model
+    var $Article = $('<div></div>');
+    var $title = $('<h1></h1>', {
+      text: this.model.escape("title")
+    })
+    var $body = $('<p></p>', {
+      text: this.model.escape("text")
+    })
+    $Article.append($title);
+    $Article.append($body);
+    return $Article;
   }
 
 

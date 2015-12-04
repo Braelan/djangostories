@@ -20,7 +20,8 @@ def get(request):
             postdict.append( dict(id=post.id,
                                    title=post.title, text=post.text,
                                    author=post.author.username, created_date=post.created_date,
-                                    published_date=post.published_date))
+                                    published_date=post.published_date,
+                                    subtitle=post.subtitle,))
     return JsonResponse(postdict, safe=False)
 
 
@@ -31,8 +32,12 @@ def get_post(request, pk):
                        text=post.text,
                     author=post.author.username,
                     created_date = post.created_date,
-                    published_date=post.published_date
+                    published_date=post.published_date,
+
                    )
+
+
+
     return JsonResponse(postprejson)
 
 
