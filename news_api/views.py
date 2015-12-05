@@ -17,11 +17,19 @@ def get(request):
 
     postdict = []
     for post in posts:
-            postdict.append( dict(id=post.id,
+        #correct for empty image field
+      if post.image == None:
+        imagestring = ""
+      else:
+        imagestring = "./static/" + post.image.url
+      postdict.append( dict(id=post.id,
                                    title=post.title, text=post.text,
                                    author=post.author.username, created_date=post.created_date,
                                     published_date=post.published_date,
-                                    subtitle=post.subtitle,))
+                                    subtitle=post.subtitle,
+                                    image= imagestring
+                                    ))
+
     return JsonResponse(postdict, safe=False)
 
 
