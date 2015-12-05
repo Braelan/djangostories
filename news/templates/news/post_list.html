@@ -3,6 +3,6 @@
 {% block content %}
 <!-- can put django template interpolation here -->
 {% for post in posts %}
-  {{post.image}}
+  <img src={{post.image}}>
  {% endfor %}
 {% endblock %}
