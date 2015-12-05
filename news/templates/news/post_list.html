@@ -1,23 +1,8 @@
 {% extends "news/base.html" %}
 
 {% block content %}
-<p>
-Long and slender,
-the blue whale's body can be various shades of bluish-grey dorsally and somewhat lighter underneath.[13]
-There are at least three distinct subspecies: B. m. musculus of the North Atlantic and North Pacific, B. m.
-intermedia of the Southern Ocean and B. m. brevicauda (also known as the pygmy blue whale) found in the Indian Ocean
- and South Pacific Ocean. B. m. indica, found in the Indian Ocean, may be another subspecies.
- As with other baleen whales, its diet consists almost exclusively of small crustaceans known as krill.[14]
- </p>
-
- <div class="nojax">
- {% for post in posts %}
-   {{post.title}}
-
-   {{post.published_date}}
-
-   {{post.text|linebreaks}}
+<!-- can put django template interpolation here -->
+{% for post in posts %}
+  <img src={{post.image}}>
  {% endfor %}
- </div>
-
 {% endblock %}
