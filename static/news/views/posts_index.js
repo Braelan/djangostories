@@ -21,9 +21,14 @@ FamiasNews.Views.PostsIndex = Backbone.View.extend({
           "class": "post"
         });
         if (post.escape("author") != "Null") {
+
+        $image = this._create_image(post);
         $title = this._create_link(post);
         $date = this._create_author_published_date(post);
         $subtitle = this._create_subtitle(post);
+        if ($image != "undefined") {
+          $post.append($image);
+        }
         $post.append($title);
         $post.append($date)
         $post.append($subtitle);
@@ -66,6 +71,18 @@ FamiasNews.Views.PostsIndex = Backbone.View.extend({
                     text: authordate
     });
     return $authordate;
+  },
+
+  _create_image: function (post) {
+    if (post.escape("image").length > 0) {
+
+      $image = $("<img></img>", {
+        src: post.escape("image")
+      });
+      return $image;
+    } else
+      return undefined;
+
   }
 
 })

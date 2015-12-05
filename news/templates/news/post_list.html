@@ -1,8 +1,12 @@
+
 {% extends "news/base.html" %}
+{% load staticfiles %}
 
 {% block content %}
 <!-- can put django template interpolation here -->
 {% for post in posts %}
-  <img src={{post.image}}>
+  {% if post.image != Null %}
+  <!-- <img src="./static/{{ post.image }}"> -->
+  {% endif %}
  {% endfor %}
 {% endblock %}
