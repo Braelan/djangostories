@@ -1,15 +1,22 @@
 FamiasNews.Routers.Router = Backbone.Router.extend({
   routes: {
-    "": "posts"
+    "": "posts",
+    "posts/:id": "post"
   },
 
   initialize: function(options) {
     this.$rootEl = options.$rootEl;
-    this.collection= FamiasNews.posts;
+    this.collection= options.collection;
   },
 
   posts: function() {
     var view = new FamiasNews.Views.PostsIndex({collection: this.collection})
+    this._swapView(view)
+  },
+
+  post: function(id) {
+    var model = this.collection.getOrFetch(id)
+    var view = new FamiasNews.Views.PostShow({model: model, collection: this.collection});
     this._swapView(view)
   },
 
