@@ -3,34 +3,19 @@ from django.shortcuts import get_list_or_404
 from django.core.urlresolvers import reverse
 from django.shortcuts import render
 from django.http import JsonResponse
+from news.serializers import PostSerializer
 from rest_framework import views
 from rest_framework.response import Response
+from rest_framework.generics import ListCreateAPIView
+from rest_framework.permissions import IsAdminUser
 from news.models import Post
 
+class PostCreateReadView(ListCreateAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    permission_classes = (IsAdminUser,)
 
-def get(request):
- # json response goes to api/posts.
- # Backbone fetches the collection in famiasnews.js
- # the collection url is set to api/posts in news/static/news/collections/posts
 
-    posts = get_list_or_404(Post)
-
-    postdict = []
-    for post in posts:
-        #correct for empty image field
-      if post.image == None:
-        imagestring = ""
-      else:
-        imagestring = "./static/" + post.image.url
-      postdict.append( dict(id=post.id,
-                                   title=post.title, text=post.text,
-                                   author=post.author.username, created_date=post.created_date,
-                                    published_date=post.published_date,
-                                    subtitle=post.subtitle,
-                                    image= imagestring
-                                    ))
-
-    return JsonResponse(postdict, safe=False)
 
 
 def get_post(request, pk):
