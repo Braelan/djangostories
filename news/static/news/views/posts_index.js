@@ -74,9 +74,10 @@ FamiasNews.Views.PostsIndex = Backbone.View.extend({
 
   _create_image: function (post) {
     if (post.escape("image").length > 0) {
-
+      var url = post.escape("image").split("/");
+      var imageurl = "static".concat("/", url[4],"/", url[5]);
       $image = $("<img></img>", {
-        src: post.escape("image")
+        src: imageurl
       });
       return $image;
     } else
