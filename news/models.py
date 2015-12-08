@@ -18,6 +18,9 @@ class Post(models.Model):
   created_date = models.DateTimeField( blank= True, null=True)
   published_date = models.DateTimeField( blank= True, null=True)
 
+  def get_absolute_url(self):
+    return reverse("flavor_detail", kwargs={"title": self.title})
+
   def publish(self):
       self.save()
 
