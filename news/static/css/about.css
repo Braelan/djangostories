@@ -3,3 +3,8 @@
     color: white;
     font-family: League Script, cursive;
   }
+
+ img {
+   height: 300px;
+   width: auto;
+ }
