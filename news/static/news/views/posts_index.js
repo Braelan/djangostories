@@ -14,7 +14,8 @@ FamiasNews.Views.PostsIndex = Backbone.View.extend({
     //displayed in base.html
 
     var $index = $("<ul></ul>")
-    var posts = this.collection
+    var posts = this.collection;
+
     if (posts.length > 0 && $("a").length === 0) {
       posts.each( function(post){
         var $post = $('<div></div', {
@@ -40,7 +41,14 @@ FamiasNews.Views.PostsIndex = Backbone.View.extend({
     return this;
   },
 
-// create a link for use as the post title in render
+//create an about page link
+  _about: function() {
+    var $a = $("<a></a>")
+    $a.text('about');
+    $a.attr('href', 'about.html');
+    return $a;
+  },
+  // create a link for use as the post title in render
   _create_link: function (post) {
     var $li = $("<a></a>");
     $li.text(post.escape("title"));
@@ -64,9 +72,9 @@ FamiasNews.Views.PostsIndex = Backbone.View.extend({
 
       var groups = text.split("-");
       var published_month = " " + months[parseInt(groups[1]) - 1] + " " + groups[0];
-      var authordate = "Written by " + post.escape("author") + ' in' + published_month;
+      var authordate = "  Written by " + post.escape("author") + ' in' + published_month;
 
-    $authordate = $('<em></em>', {
+    $authordate = $('<p></p>', {
                     text: authordate
     });
     return $authordate;

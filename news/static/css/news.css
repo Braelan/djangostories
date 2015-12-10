@@ -1,11 +1,15 @@
 html {
   font-size: 30px;
-  font-family: Alef, san-serif;
+  font-family: 'Anonymous Pro', serif;
 }
 
-.nojax {
-  background: blue;
+h1 {
+  display: block;
+  font-family: 'Playfair Display SC', serif;
+  color: white;
+  background: black;
 }
+
  li {
    background: green;
  }
