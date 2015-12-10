@@ -2,6 +2,7 @@ FamiasNews.Views.PostShow = Backbone.View.extend({
 
 
   initialize: function(options) {
+    this.collection = options.collection
     this.model = options.model
     this.listenTo(this.collection, 'sync', this.render)
     this.id = options.id
@@ -16,7 +17,7 @@ FamiasNews.Views.PostShow = Backbone.View.extend({
   makeArticle: function() {
     var model = this.model
     var $Article = $('<div></div>');
-    var $title = $('<h1></h1>', {
+    var $title = $('<h2></h2>', {
       text: this.model.escape("title")
     })
     var $body = $('<p></p>', {
