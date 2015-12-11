@@ -22,7 +22,7 @@ class HomePageTest(TestCase):
         found = resolve('/about')
         self.assertEqual(found.func, about)
 
-    def test_about_page_returns_good_html(self):
+    def test_about_page_returns_html_and_img_tags(self):
         request = HttpRequest()
         response = about(request)
         self.assertIn(b'<html>', response.content)

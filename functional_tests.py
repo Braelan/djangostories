@@ -10,10 +10,10 @@ class NewVisitorTest(unittest.TestCase):
     def tearDown(self):
         self.browser.quit()
 
-    def test_can_view_index_show_and_about(self):
+    def test_can_view_index(self):
         self.browser.get('http://localhost:8000')
         self.assertIn('Famia', self.browser.title)
-        self.fail('Finish the test!')
+
 # assert 'Famia' in browser.title
 #
 # Enter the site and see a post with Macbeth
@@ -23,6 +23,12 @@ class NewVisitorTest(unittest.TestCase):
 # the post page has 'sound and fury' on it
 #
 # from the front page, clicks about and sees 'Lorem ipsum'
+
+    def test_can_view_about(self):
+        # can visit the about page and see an image
+        self.browser.get('http://localhost:8000/about')
+        self.assertIn('About', self.browser.title)
+        self.fail('Finish the test!')
 
 if __name__ == '__main__':
     unittest.main()

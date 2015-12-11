@@ -7,7 +7,7 @@ def post_list(request):
     return render(request, 'news/post_list.html', {'posts': posts})
 
 def about(request):
-    return HttpResponse('<html>')
+    return HttpResponse('<html><title>About</title>')
 
 # def about(request):
 #     return render(request, 'news/about.html')
