@@ -7,13 +7,13 @@ from news.serializers import PostSerializer
 from rest_framework import views
 from rest_framework.response import Response
 from rest_framework.generics import ListCreateAPIView
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from news.models import Post
 
 class PostCreateReadView(ListCreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    permission_classes = (IsAdminUser,)
+    permission_classes = (IsAuthenticatedOrReadOnly,)
 
 
 
