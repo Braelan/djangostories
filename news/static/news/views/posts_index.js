@@ -16,7 +16,7 @@ FamiasNews.Views.PostsIndex = Backbone.View.extend({
     var $index = $("<ul></ul>")
     var posts = this.collection;
 
-    if (posts.length > 0 && $("a").length === 0) {
+    if (posts.length > 0 && $("a").length < 2) {
       posts.each( function(post){
         var $post = $('<div></div', {
           "class": "post"

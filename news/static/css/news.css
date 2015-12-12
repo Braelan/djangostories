@@ -13,3 +13,9 @@ h1 {
  li {
    background: green;
  }
+
+#about {
+  background: #801624;
+  display: block;
+  margin-left: 80%;
+}
