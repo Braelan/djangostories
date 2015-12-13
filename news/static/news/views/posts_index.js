@@ -51,7 +51,7 @@ FamiasNews.Views.PostsIndex = Backbone.View.extend({
   // create a link for use as the post title in render
   _create_link: function (post) {
     var $li = $("<a></a>");
-    $li.text(post.escape("title"));
+    $li.text(post.get("title"));
     link = '#posts/' + post.escape("id");
     $li.attr('href', link);
     return $li;
@@ -59,7 +59,7 @@ FamiasNews.Views.PostsIndex = Backbone.View.extend({
   // create the body of the post as a <p>
   _create_subtitle: function (post) {
     $subtitle = $('<p></p>', {
-                  text: post.escape("subtitle")
+                  text: post.get("subtitle")
     })
     return $subtitle;
 

@@ -19,10 +19,10 @@ FamiasNews.Views.PostShow = Backbone.View.extend({
     var model = this.model
     var $Article = $('<div></div>');
     var $title = $('<h2></h2>', {
-      text: this.model.escape("title")
+      text: this.model.get("title")
     })
     var $body = $('<p></p>', {
-      text: this.model.escape("text")
+      text: this.model.get("text")
     })
     $Article.append($title);
     $Article.append($body);
