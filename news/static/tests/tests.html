@@ -5,15 +5,32 @@
   <meta charset="utf-8">
   <title>QUnit Example</title>
   <link rel="stylesheet" href="qunit.css">
+  <script src="../libs/jquery.js"></script>
+  <script src="../libs/underscore.js"></script>
+  <script src="../libs/backbone.js"></script>
+    <script src="qunit.js"></script>
+
+  <script src="../news/famiasnews.js"></script>
+  <script src="../news/models/post.js"></script>
+  <script src="../news/collections/posts.js"></script>
+  <script src="../news/utils.js"></script>
+  <script src="../news/views/post_show.js"></script>
+  <script src="../news/views/posts_index.js"></script>
+  <script src="../news/routes.js"></script>
+
 </head>
 <body>
   <div id="qunit"></div>
   <div id="qunit-fixture"></div>
-  <script type="text/javascript" src=../news/famiasnews.js>
+<script type="text/javascript" src='tests.js'>
 
-  </script>
-<script src="qunit.js"></script>
-  <script src="//code.jquery.com/qunit/qunit-1.20.0.js"></script>
-  <script src="tests.js"></script>
+</script>
 </body>
 </html>
+<script type="text/javascript">
+</script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    FamiasNews.initialize();
+  });
+</script>
