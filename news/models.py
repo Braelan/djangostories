@@ -12,7 +12,7 @@ def generate_filename(instance, filename):
 class Post(models.Model):
   author = models.ForeignKey('auth.User')
   title = models.CharField(max_length=200)
-  image = models.ImageField(null=True, upload_to=generate_filename)
+  image = models.ImageField(null=True, blank = True, upload_to=generate_filename)
   text = models.TextField()
   subtitle = models.TextField(null=True)
   created_date = models.DateTimeField( blank= True, null=True)

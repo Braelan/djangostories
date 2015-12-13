@@ -2,9 +2,10 @@ FamiasNews.Views.PostShow = Backbone.View.extend({
 
 
   initialize: function(options) {
-    this.collection = options.collection
     this.model = options.model
+    this.collection = options.collection
     this.listenTo(this.collection, 'sync', this.render)
+    this.listenTo(this.model, 'sync', this.render)
     this.id = options.id
   },
 
