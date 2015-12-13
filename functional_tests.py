@@ -54,7 +54,6 @@ class NewVisitorTest(unittest.TestCase):
         about = self.browser.find_element_by_id('about')
         about.click()
         self.assertIn('About', self.browser.title)
-        self.fail('Finish the test!')
 
 if __name__ == '__main__':
     unittest.main()
