@@ -9,6 +9,12 @@ h1 {
   color: white;
   background: #2D0131;
 }
+.email {
+  display: block;
+  float: right;
+  font-size: 14px;
+}
+
 
  li {
    background: green;
@@ -17,5 +23,5 @@ h1 {
 #about {
   background: #801624;
   display: block;
-  margin-left: 80%;
+  margin-left: 70%;
 }
