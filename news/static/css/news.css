@@ -26,6 +26,7 @@ h1 {
   background: #2D0131;
   margin: 0;
 }
+
 .email {
   display: block;
   float: right;
@@ -62,4 +63,16 @@ h1 {
   display: block;
   margin-left: 70%;
   margin-top: 0;
+}
+
+/*specific for show page*/
+
+.show-title, .show-article {
+  margin: 10px;
+}
+.show-title {
+  font-size: 30px;}
+
+.show-article{
+  font-size: 20px;
 }
