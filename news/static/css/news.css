@@ -1,13 +1,30 @@
+html, body, section, article,
+h1, h2, p, strong, em, a {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  outline: 0;
+  box-sizing: inherit;
+  font: inherit;
+  /*text-decoration: inherit;*/
+  text-align: inherit;
+  color: inherit;
+  background: transparent;
+}
+
 html {
   font-size: 30px;
   font-family: 'Roboto', serif;
 }
 
+
 h1 {
+  font-size: 70px;
   display: block;
   font-family: 'Playfair Display SC', serif;
   color: white;
   background: #2D0131;
+  margin: 0;
 }
 .email {
   display: block;
@@ -15,7 +32,25 @@ h1 {
   font-size: 14px;
 }
 
+.post {
+  padding: 10px;
+}
 
+.post > a, .post > p {
+  margin: 20px;
+}
+
+.post > a {
+  color: blue;
+}
+
+.post > p {
+  font-size: 20px;
+}
+
+.post > .author {
+  font-size: 15px;
+}
  li {
    background: green;
  }
@@ -25,4 +60,5 @@ h1 {
   background: #801624;
   display: block;
   margin-left: 70%;
+  margin-top: 0;
 }

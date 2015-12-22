@@ -16,7 +16,7 @@ FamiasNews.Views.PostsIndex = Backbone.View.extend({
     var $index = $("<ul></ul>")
     var posts = this.collection;
 
-    if (posts.length > 0 && $("a").length < 2) {
+    if (posts.length > 0 && $("a").length < 3) {
       posts.each( function(post){
         var $post = $('<div></div', {
           "class": "post"
@@ -75,7 +75,8 @@ FamiasNews.Views.PostsIndex = Backbone.View.extend({
       var authordate = "  Written by " + post.escape("author") + ' in' + published_month;
 
     $authordate = $('<p></p>', {
-                    text: authordate
+                    text: authordate,
+                    class: "author"
     });
     return $authordate;
   },

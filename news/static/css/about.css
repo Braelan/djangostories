@@ -12,3 +12,12 @@
 .about {
   font-size: 25px;
 }
+
+#about {
+  color:white;
+  background: #801624;
+  display: block;
+  margin-left: 70%;
+  font-family: Roboto;
+  font-size: 30px;
+}
