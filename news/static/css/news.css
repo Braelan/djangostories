@@ -20,7 +20,8 @@ html {
 body{
   width: 1024px;
   margin: auto;
-  border: 1px solid grey;
+  border-top: 1px solid #E5E5E5;
+  border-left: 1px solid #E5E5E5;
 }
 
 div {
@@ -30,13 +31,32 @@ div {
   padding: 0;
 }
 
+header{
+  width: 1024px;
+  background: #2D0131;
+  height: 95px;
+  position: fixed;
+}
+
+#about {
+  color:white;
+  background: #801624;
+  display: block;
+  /*margin-left: 70%;*/
+  margin-top: 0;
+  float: right;
+  padding: 0 10px;
+  margin: 5px;
+  border-radius: 10px;
+  /*border: 1px solid red;*/
+}
 
 h1 {
+  float:left;
   font-size: 70px;
-  display: block;
+  display: inline-block;
   font-family: 'Playfair Display SC', serif;
   color: white;
-    background: #2D0131;
   margin: 0;
   /*position: fixed;*/
 }
@@ -45,18 +65,21 @@ h1 {
 display: block;
   float: right;
   font-size: 14px;
+  color: white;
+  padding: 0 10px 0 0;
+  margin-left: 38%;
 }
 /*body of the posts*/
 
 .container {
-  margin: 0px 80px 0 80px;
+  margin: 100px 80px 0 80px;
 }
 
 img{ display: block;}
 
 .post {
   /*background: red;*/
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid #E5E5E5;
 }
 
 .post > a, .post > p {
@@ -83,16 +106,12 @@ img{ display: block;}
    background: green;
  }
 
-#about {
-  color:white;
-  background: #801624;
-  display: block;
-  margin-left: 70%;
-  margin-top: 0;
-}
+
 
 /*specific for show page*/
-
+.show-container {
+  margin-top: 100px;
+}
 .show-title, .show-article {
   margin: 10px;
 }

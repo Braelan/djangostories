@@ -7,6 +7,8 @@ FamiasNews.Views.PostShow = Backbone.View.extend({
     this.listenTo(this.collection, 'sync', this.render)
     this.listenTo(this.model, 'sync', this.render)
     this.id = options.id
+    this.$el = $("<div></div>",
+                  {class: "show-container"})
   },
 
   render: function() {
