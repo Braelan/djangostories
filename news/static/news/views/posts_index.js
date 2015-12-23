@@ -15,6 +15,7 @@ FamiasNews.Views.PostsIndex = Backbone.View.extend({
 
     var $index = $("<ul></ul>")
     var posts = this.collection;
+    posts.sort(posts.comparator);
 
     if (posts.length > 0 && $("a").length < 3) {
       posts.each( function(post){
