@@ -38,7 +38,7 @@ FamiasNews.Views.PostShow = Backbone.View.extend({
   _processText: function(text) {
     if (typeof text != "undefined") {
     text = text.replace(/\n/g, '<br>');
-    text = "<p>" + text + "</p>";
+    text = "<p class='show-article'>" + text + "</p>";
     return text;
   } else { return ""}
   }
