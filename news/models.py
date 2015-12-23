@@ -15,7 +15,7 @@ class Post(models.Model):
   image = models.ImageField(null=True, blank = True, upload_to=generate_filename)
   text = models.TextField()
   subtitle = models.TextField(null=True)
-  created_date = models.DateTimeField( blank= True, null=True)
+  created_date = models.DateTimeField( blank= False, null=True)
   published_date = models.DateTimeField( blank= True, null=True)
 
   def get_absolute_url(self):
