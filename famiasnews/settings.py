@@ -61,21 +61,21 @@ WSGI_APPLICATION = 'famiasnews.wsgi.application'
 #
 DATABASES = {
 
-        # 'default': {
-        #     'ENGINE': 'django.db.backends.mysql',
-        #     'NAME': 'famia$newsdb',
-        #     'USER': 'famia',
-        #     'PASSWORD': 'booker',
-        #     'HOST': 'mysql.server',
-        # },
-       'default': {
-          'ENGINE': 'django.db.backends.mysql',
-          'NAME': 'newsdb',
-           'USER': 'root',
-           'PASSWORD': 'booker',
-           'HOST': '',
-           'PORT': '',
-               },
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'famia$newsdb',
+            'USER': 'famia',
+            'PASSWORD': 'booker',
+            'HOST': 'mysql.server',
+        },
+    #    'default': {
+    #       'ENGINE': 'django.db.backends.mysql',
+    #       'NAME': 'newsdb',
+    #        'USER': 'root',
+    #        'PASSWORD': 'booker',
+    #        'HOST': '',
+    #        'PORT': '',
+    #            },
 
           }
 
