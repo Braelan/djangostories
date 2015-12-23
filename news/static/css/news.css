@@ -33,6 +33,7 @@ h1 {
   font-size: 14px;
 }
 
+img{ display: block;}
 .post {
   padding: 10px;
 }
