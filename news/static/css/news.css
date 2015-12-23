@@ -1,12 +1,12 @@
 html, body, section, article,
-h1, h2, p, strong, em, a {
+h1, h2, p, strong, em, a, div, span, header{
   margin: 0;
   border: 0;
   padding: 0;
   outline: 0;
   box-sizing: inherit;
   font: inherit;
-  /*text-decoration: inherit;*/
+  text-decoration: inherit;
   text-align: inherit;
   color: inherit;
   background: transparent;
@@ -17,34 +17,58 @@ html {
   font-family: 'Roboto', serif;
 }
 
+body{
+  width: 1024px;
+  margin: auto;
+  border: 1px solid grey;
+}
+
+div {
+  /*border: 1px solid red;*/
+  /*background: yellow;*/
+  margin: 0;
+  padding: 0;
+}
+
 
 h1 {
   font-size: 70px;
   display: block;
   font-family: 'Playfair Display SC', serif;
   color: white;
-  background: #2D0131;
+    background: #2D0131;
   margin: 0;
+  /*position: fixed;*/
 }
 
 .email {
-  display: block;
+display: block;
   float: right;
   font-size: 14px;
 }
+/*body of the posts*/
+
+.container {
+  margin: 0px 80px 0 80px;
+}
 
 img{ display: block;}
+
 .post {
-  padding: 10px;
+  /*background: red;*/
 }
 
 .post > a, .post > p {
-  margin: 20px 20px 20px 0;
+  /*background: green;*/
+  margin: 10px 10px 10px 0;
 }
 
 .post > a {
-  color: blue;
-  margin: 0 0 0 20px;
+  color: black;
+}
+
+.post > a:hover {
+  text-decoration:underline;
 }
 
 .post > p {

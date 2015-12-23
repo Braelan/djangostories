@@ -4,6 +4,9 @@ FamiasNews.Views.PostsIndex = Backbone.View.extend({
   initialize: function(options) {
     this.collection = options.collection;
     this.listenTo(this.collection, "sync", this.render)
+    this.$el = $("<div></div>", {
+                class: "container"
+                })
   },
 
   render: function() {
@@ -12,7 +15,6 @@ FamiasNews.Views.PostsIndex = Backbone.View.extend({
 
     //this injects into the span element as set in famiasnews.js $root and
     //displayed in base.html
-
     var $index = $("<ul></ul>")
     var posts = this.collection;
     posts.sort(posts.comparator);
@@ -34,7 +36,7 @@ FamiasNews.Views.PostsIndex = Backbone.View.extend({
         $post.append($date)
         $post.append($subtitle);
         this.$el.append($post);
-        this.$el.append("<br>");
+        // this.$el.append("<br>");
       }
       }.bind(this))
     }
