@@ -13,7 +13,9 @@ FamiasNews.Views.PostShow = Backbone.View.extend({
 
   render: function() {
      $Article = this.makeArticle();
+     $input = this.inputComment();
      this.$el.empty().append($Article)
+     this.$el.append($input);
      return this;
   },
 
@@ -41,6 +43,11 @@ FamiasNews.Views.PostShow = Backbone.View.extend({
     text = "<p class='show-article'>" + text + "</p>";
     return text;
   } else { return ""}
+},
+
+  inputComment: function() {
+    var $input = $('<input id="new_comment" placeholder="Nice comments here please."><input>')
+    return $input;
   }
 
 
