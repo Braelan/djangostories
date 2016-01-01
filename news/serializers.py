@@ -1,4 +1,11 @@
 from rest_framework import serializers
+from news.models import Comment
+
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+      model = Comment
+      fields = ('text', 'id')
+
 
 class PostSerializer(serializers.Serializer):
     author = serializers.StringRelatedField()
@@ -9,3 +16,5 @@ class PostSerializer(serializers.Serializer):
     id = serializers.IntegerField()
     created_date = serializers.DateTimeField(format = None, input_formats = None)
     published_date = serializers.DateTimeField(format = None, input_formats = None)
+    # comments = serializers.StringRelatedField(many=True)
+    comments = CommentSerializer(many=True, read_only=True)

@@ -1,5 +1,5 @@
 html, body, section, article,
-h1, h2, p, strong, em, a, div, span, header{
+h1, h2, p, strong, em, a, div, span, header, ul, li{
   margin: 0;
   border: 0;
   padding: 0;
@@ -8,6 +8,7 @@ h1, h2, p, strong, em, a, div, span, header{
   font: inherit;
   text-decoration: inherit;
   text-align: inherit;
+  list-style: none;
   color: inherit;
   background: transparent;
 }
@@ -103,7 +104,8 @@ img{ display: block;}
   font-size: 15px;
 }
  li {
-   background: green;
+   padding: 10px 0;
+   font-size: 12px;
  }
 
 

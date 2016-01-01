@@ -30,22 +30,7 @@ FamiasNews.Views.PostShow = Backbone.View.extend({
      return this;
   },
 
-  submit: function(event) {
-    event.preventDefault();
-    $.ajax({
-      url: "/",
-      type: "POST",
-      data: {comment_text: "test_comment"},
-      success: function()  {
-        console.log("comment posted")
-      },
-      error: function() {
-        console.log("Ajax oops")
-      }
-    })
 
-
-  },
 
 
   makeArticle: function() {
@@ -82,8 +67,53 @@ FamiasNews.Views.PostShow = Backbone.View.extend({
     return $input;
   },
 
+  //comments are going to be sent via jquery ajax.  They will be saved at views.py.
+  // then they will be serialized along with posts and sent to the posts api, parsed
+  //with the model and served here.
+
+    submit: function(event) {
+      event.preventDefault();
+      var comment = $('#new_comment').val();
+      var id = this.model.id
+      var that = this;
+      $.ajax({
+        url: "/",
+        type: "POST",
+        data: {comment_text: comment, post_id: id},
+        success: function()  {
+          that.model.fetch();
+          console.log("comment posted")
+        },
+        error: function() {
+          console.log("Ajax oops")
+        }
+      })
+
+
+    },
+
   showComments: function () {
     var $comments = $('<ul id="comments"></ul>')
+
+    var comments = this.model.get('comments') || this.model.get('comment_list')
+    // var length = comments.length || this.model.get('length')
+    if (comments && comments.length) {
+      for (var i = 0; i <comments.length; i++ ) {
+        var $comment = $('<li></li>',{
+          text: comments[i].text
+        })
+        $comments.append($comment)
+
+      }
+    }
+    else if (comments && this.model.get('length')) {
+      for (var i = 0; i < this.model.get('length'); i++ ) {
+        var $comment = $('<li></li>',{
+          text: comments[i]
+        })
+        $comments.append($comment)
+    }
+  }
     return $comments
   },
 

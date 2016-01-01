@@ -11,7 +11,7 @@ def post_list(request):
         comment = Comment()
         comment.text = request.POST.get('comment_text')
         comment.author_id = 1
-        comment.post_id = 1
+        comment.post_id = request.POST.get('post_id')
 
         comment.save()
         return render(request, 'news/post_list.html', {'new_item_text' : request.POST['comment_text']})

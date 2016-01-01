@@ -38,7 +38,7 @@ def news_post_delete_handler(sender, **kwargs):
 
 class Comment(models.Model):
     author = models.ForeignKey('auth.User')
-    post = models.ForeignKey('Post')
+    post = models.ForeignKey('Post', related_name='comments')
     text = models.CharField(max_length = 500)
     created_date = models.DateTimeField(auto_now_add = True)
     updated_date = models.DateTimeField(auto_now = True)
@@ -48,3 +48,6 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.text + " on " + self.post.title
+
+    def __unicode(self):
+        return self.text
