@@ -34,3 +34,17 @@ def news_post_delete_handler(sender, **kwargs):
       Post = kwargs['instance']
       storage, path = Post.image.storage, Post.image.path
       storage.delete(path)
+
+
+class Comment(models.Model):
+    author = models.ForeignKey('auth.User')
+    post = models.ForeignKey('Post')
+    text = models.CharField(max_length = 500)
+    created_date = models.DateTimeField(auto_now_add = True)
+    updated_date = models.DateTimeField(auto_now = True)
+
+    def publish(self):
+        self.save()
+
+    def __str__(self):
+        return self.text + " on " + self.post.title

@@ -1,5 +1,8 @@
 FamiasNews.Views.PostShow = Backbone.View.extend({
-
+  tagName: "form",
+  events: {
+    "click .submit" : "submit"
+  },
 
   initialize: function(options) {
     this.model = options.model
@@ -7,16 +10,41 @@ FamiasNews.Views.PostShow = Backbone.View.extend({
     this.listenTo(this.collection, 'sync', this.render)
     this.listenTo(this.model, 'sync', this.render)
     this.id = options.id
-    this.$el = $("<div></div>",
-                  {class: "show-container"})
+    // this.$el = $("<div></div>",
+    //               {class: "show-container"})
   },
 
   render: function() {
+     $Container = $("<div></div>",
+                   {class: "show-container"});
      $Article = this.makeArticle();
      $input = this.inputComment();
-     this.$el.empty().append($Article)
-     this.$el.append($input);
+     $comments = this.showComments();
+     $Container.append($Article);
+     $Container.append($input);
+     $Container.append($comments);
+     this.$el.empty().append($Container);
+    //  this.$el.append($input);
+    //  this.$el.append($comments);
+
      return this;
+  },
+
+  submit: function(event) {
+    event.preventDefault();
+    $.ajax({
+      url: "/",
+      type: "POST",
+      data: {comment_text: "test_comment"},
+      success: function()  {
+        console.log("comment posted")
+      },
+      error: function() {
+        console.log("Ajax oops")
+      }
+    })
+
+
   },
 
 
@@ -46,9 +74,18 @@ FamiasNews.Views.PostShow = Backbone.View.extend({
 },
 
   inputComment: function() {
-    var $input = $('<input id="new_comment" placeholder="Nice comments here please."><input>')
+    var $input = $(
+         "<form>"  +
+            "<input name='comment_text' id='new_comment' placeholder='Nice comments here please.'>" +
+            "<input class='submit' type='submit' value='comment'>" +
+         "</input></form>")
     return $input;
-  }
+  },
+
+  showComments: function () {
+    var $comments = $('<ul id="comments"></ul>')
+    return $comments
+  },
 
 
 })

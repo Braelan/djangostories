@@ -1,5 +1,6 @@
 from selenium import webdriver
 import unittest
+from selenium.webdriver.common.keys import Keys
 # goes to browser and sees famia in title
 
 class NewVisitorTest(unittest.TestCase):
@@ -33,10 +34,11 @@ class NewVisitorTest(unittest.TestCase):
         # could refactor here.
         self.browser.get('http://localhost:8000')
         list_items = self.browser.find_elements_by_tag_name('a')
-        test_item = list_items[3]
+        test_item = list_items[2]
         link_title = test_item.text
         test_item.click()
           # sees a box to add a comment
+        self.browser.implicitly_wait(8)
         inputbox = self.browser.find_element_by_id('new_comment')
         self.assertEqual(inputbox.get_attribute('placeholder'), 'Nice comments here please.'
         )
@@ -44,10 +46,11 @@ class NewVisitorTest(unittest.TestCase):
         inputbox.send_keys('I never knew that about whales')
         inputbox.send_keys(Keys.ENTER)
         #can see the comment has appeared on the screen
-        table = self.browser.find_element_by_id('comments')
-        rows = table.find_elements_by_tag_name('tr')
+        ul = self.browser.find_element_by_id('comments')
+        lis = self.browser.find_elements_by_tag_name('li')
         self.assertTrue(
-            any(row.text == 'I never knew that about whales' for row in rows)
+            any(li.text == 'I never knew that about whales' for li in lis),
+            "New comment didn't appear on show_page, the text was: %s" % (ul.text,)
             )
 
         #can add another comment if she wants
@@ -63,7 +66,7 @@ class NewVisitorTest(unittest.TestCase):
         test_item = list_items[3]
         link_title = test_item.text
         test_item.click()
-        self.browser.implicitly_wait(3)
+        # self.browser.implicitly_wait(3)
         page_title = self.browser.find_element_by_tag_name('h2').text
         self.assertTrue(page_title == link_title)
 
