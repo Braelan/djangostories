@@ -104,7 +104,6 @@ FamiasNews.Views.PostShow = Backbone.View.extend({
           text: comments[i].text
         })
         $comments.append($comment)
-
       }
     }
     else if (comments && this.model.get('length')) {
