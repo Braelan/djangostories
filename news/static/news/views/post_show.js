@@ -7,8 +7,8 @@ FamiasNews.Views.PostShow = Backbone.View.extend({
   initialize: function(options) {
     this.model = options.model
     this.collection = options.collection
-    this.listenTo(this.collection, 'sync', this.render)
-    this.listenTo(this.model, 'sync', this.render)
+    this.listenTo(this.collection, 'sync change all', this.render)
+    this.listenTo(this.model, 'sync change all', this.render)
     this.id = options.id
     // this.$el = $("<div></div>",
     //               {class: "show-container"})
@@ -82,6 +82,7 @@ FamiasNews.Views.PostShow = Backbone.View.extend({
         data: {comment_text: comment, post_id: id},
         success: function()  {
           that.model.fetch();
+          that.collection.fetch()
           console.log("comment posted")
         },
         error: function() {
