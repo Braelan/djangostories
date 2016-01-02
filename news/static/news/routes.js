@@ -16,7 +16,7 @@ FamiasNews.Routers.Router = Backbone.Router.extend({
 
   post: function(id) {
     var model = this.collection.getOrFetch(id)
-    var view = new FamiasNews.Views.PostShow({model: model, collecion: this.collection});
+    var view = new FamiasNews.Views.PostShow({model: model, collection: this.collection});
     this._swapView(view)
   },
 
