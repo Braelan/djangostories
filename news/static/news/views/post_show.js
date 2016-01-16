@@ -1,7 +1,8 @@
 FamiasNews.Views.PostShow = Backbone.View.extend({
   tagName: "form",
   events: {
-    "click .submit" : "submit"
+    "click .submit" : "submit",
+    "click .login"  : "login"
   },
 
   initialize: function(options) {
@@ -19,9 +20,11 @@ FamiasNews.Views.PostShow = Backbone.View.extend({
                    {class: "show-container"});
      $Article = this.makeArticle();
      $input = this.inputComment();
+     $userLogin = this.userLogin();
      $comments = this.showComments();
      $Container.append($Article);
      $Container.append($input);
+     $Container.append($userLogin);
      $Container.append($comments);
      this.$el.empty().append($Container);
     //  this.$el.append($input);
@@ -67,6 +70,34 @@ FamiasNews.Views.PostShow = Backbone.View.extend({
     return $input;
   },
 
+  userLogin: function () {
+    var $login = $(
+                  "<div id = sign-in>" +
+                  "<form class=sign-in>" +
+                  "<label for='username'>Username:</label>" +
+                  "<input id='username' label='username'>" +
+                  "<label for='password'>Password:</label>" +
+                  "<input type='password' id='password'>" +
+                  "<input class='log-in' type='submit' value='Sign In'>" +
+                  "</form>" +
+                  "</div>");
+    return $login
+  },
+
+  login: function(event) {
+// get a comments value and pass it to sendUser, following the django docs
+    var
+
+  },
+
+  sendUser: function() {
+    $.ajax({
+      url:"/",
+      type: "POST",
+      data: {username}
+    })
+  },
+
   //comments are going to be sent via jquery ajax.  They will be saved at views.py.
   // then they will be serialized along with posts and sent to the posts api, parsed
   //with the model and served here.
@@ -76,6 +107,12 @@ FamiasNews.Views.PostShow = Backbone.View.extend({
       var comment = $('#new_comment').val();
       var id = this.model.id
       var that = this;
+      $('form.sign-in').toggleClass('on');
+      this.sendComment(comment, id, that);
+
+    },
+
+    sendComment: function (comment, id, that) {
       $.ajax({
         url: "/",
         type: "POST",
@@ -89,8 +126,6 @@ FamiasNews.Views.PostShow = Backbone.View.extend({
           console.log("Ajax oops")
         }
       })
-
-
     },
 
   showComments: function () {
@@ -116,6 +151,12 @@ FamiasNews.Views.PostShow = Backbone.View.extend({
   }
     return $comments
   },
+
+
+
+
+
+
 
 
 })

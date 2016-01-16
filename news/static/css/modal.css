@@ -1,0 +1,20 @@
+.sign-in {
+  background: red;
+  /*display: none;*/
+  flex-direction: column;
+ width: 400px;
+ margin: auto;
+ border: 1px solid gray;
+}
+
+#username{
+ order: 1;
+}
+
+#password{
+order: 2;
+}
+
+#sign-in > .on {
+  display: flex;
+}

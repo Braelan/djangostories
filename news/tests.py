@@ -77,3 +77,21 @@ class CommentModelTest(TestCase):
         self.assertTrue(saved_items.count() > 1)
         self.assertEqual(first_saved_item.text, 'This is a Test (comment)')
         self.assertEqual(second_saved_item.text, "This is another test (comment)")
+
+class UserModelTest(TestCase):
+
+    def test_saving_and_retrieving_users(self):
+        new_user = User()
+        new_user.username = 'Nemo'
+        new_user.id = 3
+        new_user.email = "emo@nemo.com"
+        new_user.first_name = 'Nemo'
+        new_user.last_name = 'the Fish'
+
+        new_user.save()
+
+        saved_users = User.objects.all()
+        first_saved_user = saved_users[0]
+
+        self.assertTrue(saved_users.count > 10)
+        self.assertEqual(first_saved_user.email, 'emo@nemo.com')
