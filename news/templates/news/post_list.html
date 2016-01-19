@@ -6,10 +6,10 @@
 <!-- can put django template interpolation here -->
 <!-- {{ new_item_text}} -->
 <p class='login'>{% if user.is_authenticated %} Logged in as: {{user.username}}
-  <form class="logout" action="user" method="get">
-    <input type="submit" name="name" value="log-out">
-  </form>
-<button id='logout' class='log-out' type="button" name="button">log out</button>
+  <!-- <form class="logout" action="user" method="get">
+    <input type="submit" name="id" value= {{1}}>
+  </form> -->
+<button id="logout" class="log-out" type="button" name="button">log out</button>
   {% endif %}</p>
 <!-- {% for post in posts %}
 {{post.title}}
@@ -19,9 +19,11 @@
   $('button').click(function() {
     $.ajax({
       url: "user",
-      type: "GET"
+      type: "GET",
+      success: function(data) {
+        window.location.reload();
+      }
     }
-
     )
   })
 </script>

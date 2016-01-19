@@ -44,7 +44,8 @@ def new_user(request):
         user.save()
         user = authenticate(username=username, password=password)
         login(request, user)
-        return HttpResponseRedirect(url)
+        return JsonResponse({'username': user.username})
+#handle logout
     else:
         url = request.META.get('HTTP_REFERER')
         logout(request)

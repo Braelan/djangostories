@@ -108,7 +108,7 @@ event.preventDefault();
       type: "POST",
       data: hash,
       success: function (val) {
-        debugger
+        window.location.reload();
       }
     })
   },
@@ -122,11 +122,7 @@ event.preventDefault();
   },
 
 
-logout: function(event) {
-  event.preventDefault();
-  console.log('hello')
-  debugger
-},
+
   //comments are going to be sent via jquery ajax.  They will be saved at views.py.
   // then they will be serialized along with posts and sent to the posts api, parsed
   //with the model and served here.
