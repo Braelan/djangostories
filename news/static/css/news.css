@@ -40,7 +40,9 @@ header{
   height: 95px;
   position: fixed;
 }
-
+.login {
+  color: white;
+}
 #about {
   color:white;
   background: #801624;

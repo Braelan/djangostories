@@ -1,8 +1,9 @@
 FamiasNews.Views.PostShow = Backbone.View.extend({
-  tagName: "form",
+  // tagName: "form",
   events: {
     "click .submit" : "submit",
-    "click .login"  : "login"
+    "click .log-in"  : "login",
+    "click .logout" : "logout",
   },
 
   initialize: function(options) {
@@ -26,10 +27,12 @@ FamiasNews.Views.PostShow = Backbone.View.extend({
      $Container.append($input);
      $Container.append($userLogin);
      $Container.append($comments);
+    //  $Container.append($('.log-out'));
      this.$el.empty().append($Container);
+
     //  this.$el.append($input);
     //  this.$el.append($comments);
-
+    this.delegateEvents();
      return this;
   },
 
@@ -75,9 +78,15 @@ FamiasNews.Views.PostShow = Backbone.View.extend({
                   "<div id = sign-in>" +
                   "<form class=sign-in>" +
                   "<label for='username'>Username:</label>" +
-                  "<input id='username' label='username'>" +
-                  "<label for='password'>Password:</label>" +
-                  "<input type='password' id='password'>" +
+                  "<input id='username' name='username' label='username'>" +
+                  "<label for='name'>Name:</label>" +
+                  "<input id='name' name='name' label='name'>" +
+                  "<label for='last_name'>Last Name:</label>" +
+                  "<input id='last_name' name='last_name' label='last_name'>" +
+                  "<label for='email'>Email:</label>" +
+                  "<input id='email' name='email' label='email'>" +
+                   "<label for='password'>Password:</label>" +
+                  "<input type='password' name='password' id='password'>" +
                   "<input class='log-in' type='submit' value='Sign In'>" +
                   "</form>" +
                   "</div>");
@@ -86,18 +95,38 @@ FamiasNews.Views.PostShow = Backbone.View.extend({
 
   login: function(event) {
 // get a comments value and pass it to sendUser, following the django docs
-    var
+event.preventDefault();
 
+ var formValues = $('.sign-in > input').serializeArray()
+ var hash = this._toHash(formValues)
+ this.sendUser(hash)
   },
 
-  sendUser: function() {
+  sendUser: function(hash) {
     $.ajax({
-      url:"/",
+      url:"user",
       type: "POST",
-      data: {username}
+      data: hash,
+      success: function (val) {
+        debugger
+      }
     })
   },
 
+  _toHash: function(array) {
+    var hash = {}
+    for (var i = 0; i < array.length; i++) {
+      hash[array[i].name] = array[i].value
+    }
+    return hash
+  },
+
+
+logout: function(event) {
+  event.preventDefault();
+  console.log('hello')
+  debugger
+},
   //comments are going to be sent via jquery ajax.  They will be saved at views.py.
   // then they will be serialized along with posts and sent to the posts api, parsed
   //with the model and served here.
