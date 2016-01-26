@@ -29,7 +29,8 @@ def get_post(request, pk):
                     created_date = post.created_date,
                     published_date=post.published_date,
                     comment_list = comments,
-                    length = length
+                    length = length,
+
                    )
     return JsonResponse(postprejson)
 

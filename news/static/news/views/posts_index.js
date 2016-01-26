@@ -6,6 +6,7 @@ FamiasNews.Views.PostsIndex = Backbone.View.extend({
     this.listenTo(this.collection, "sync", this.render)
     this.$el = $("<div></div>",
                   {class: "container"})
+    this.template = new EJS({url: 'index_template'})
   },
 
   render: function() {
@@ -36,7 +37,8 @@ FamiasNews.Views.PostsIndex = Backbone.View.extend({
         $post.append($date)
         $post.append($subtitle);
         this.$el.append($post);
-
+        var posts = this.collection.toJSON();
+        this.$el.html(this.template.render({posts}))
       }
       }.bind(this))
     }

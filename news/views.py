@@ -30,6 +30,9 @@ def about(request):
 # def about(request):
 #     return render(request, 'news/about.html')
 
+def index_template(request):
+    return render(request, 'news/ejs/post_index.ejs')
+
 def new_user(request):
     url = request.META.get('HTTP_REFERER')
     if request.method == 'POST' and not request.POST.get('login') == 'true':
@@ -54,6 +57,7 @@ def new_user(request):
         url = request.META.get('HTTP_REFERER')
         logout(request)
         return HttpResponseRedirect(url)
+
 
 
 def signIn(request):
