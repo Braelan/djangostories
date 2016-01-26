@@ -4,6 +4,7 @@ FamiasNews.Views.PostShow = Backbone.View.extend({
     "click .submit" : "submit",
     "click .log-in"  : "login",
     "click .logout" : "logout",
+    "click #signin" : "signIn"
   },
 
   initialize: function(options) {
@@ -23,9 +24,11 @@ FamiasNews.Views.PostShow = Backbone.View.extend({
      $input = this.inputComment();
      $userLogin = this.userLogin();
      $comments = this.showComments();
+     $signInForm = this.signInForm();
      $Container.append($Article);
      $Container.append($input);
      $Container.append($userLogin);
+     $Container.append($signInForm)
      $Container.append($comments);
     //  $Container.append($('.log-out'));
      this.$el.empty().append($Container);
@@ -121,6 +124,27 @@ event.preventDefault();
     return hash
   },
 
+  signInForm: function() {
+    $signInForm = $('<div id="sign-in">'  +
+                '<form class="sign">' +
+                '<input type="password" name="password">password</input>' +
+                '<input name="username">username</input>' +
+                 '<input id="signin" type="submit">' +
+                '</form>' +
+                '</div>'
+              )
+
+    return $signInForm
+  },
+
+  signIn: function(event) {
+    event.preventDefault();
+    var formValues = $('.sign > input').serializeArray()
+    var hash = this._toHash(formValues)
+    hash['login'] = 'true';
+    debugger
+    this.sendUser(hash)
+  },
 
 
   //comments are going to be sent via jquery ajax.  They will be saved at views.py.

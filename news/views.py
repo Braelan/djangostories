@@ -32,7 +32,7 @@ def about(request):
 
 def new_user(request):
     url = request.META.get('HTTP_REFERER')
-    if request.method == 'POST':
+    if request.method == 'POST' and not request.POST.get('login') == 'true':
         username = request.POST.get('username')
         first_name = request.POST.get('name')
         last_name = request.POST.get('last_name')
@@ -46,7 +46,22 @@ def new_user(request):
         login(request, user)
         return JsonResponse({'username': user.username})
 #handle logout
+    elif request.method =='POST':
+        username = signIn(request)
+        return JsonResponse({'username': username})
+
     else:
         url = request.META.get('HTTP_REFERER')
         logout(request)
         return HttpResponseRedirect(url)
+
+
+def signIn(request):
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        print 'THIS IS THE' + request.POST.get('username')
+        user = User.objects.get(username=username)
+        user = authenticate(username=username, password=password)
+        login(request, user)
+
+        return username
