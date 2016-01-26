@@ -26,7 +26,7 @@ FamiasNews.Collections.Posts = Backbone.Collection.extend({
   parse: function(payload) {
     for (var i = 0; i < payload.length; i++) {
       payload[i].image = this._parse_images(payload[i])
-      payload[i].authordate = this._create_author_published_date(payload[i])
+      payload[i].authordate = this._parse_author_published_date(payload[i])
       }
       return payload
   },
@@ -40,17 +40,14 @@ FamiasNews.Collections.Posts = Backbone.Collection.extend({
     return null
   },
 
-  _create_author_published_date: function(post) {
+  _parse_author_published_date: function(post) {
     var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
                     "August", "September", "October", "November", "December"]
     var text = post.published_date;
-
     var groups = text.split("-");
     var published_month = " " + months[parseInt(groups[1]) - 1] + " " + groups[0];
     var authordate = "  Written by " + post.author + ' in' + published_month;
-
     return authordate;
-
   },
 
   _numDate: function(date) {
