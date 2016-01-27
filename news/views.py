@@ -32,7 +32,6 @@ def index_template(request):
 
 def show_template(request):
     return render(request, 'news/ejs/post_show.ejs')
-
 def new_user(request):
     url = request.META.get('HTTP_REFERER')
     if request.method == 'POST' and not request.POST.get('login') == 'true':

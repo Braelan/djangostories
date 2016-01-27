@@ -15,55 +15,15 @@ FamiasNews.Views.PostShow = Backbone.View.extend({
     this.listenTo(this.model, 'sync change all', this.render)
     this.id = options.id
     this.template = new EJS({url:'show_template'})
-    // this.$el = $("<div></div>",
-    //               {class: "show-container"})
   },
 
   render: function() {
-     $Container = $("<div></div>",
-                   {class: "show-container"});
-    //  $Article = this.makeArticle();
-    //  $input = this.inputComment();
-    //  $userLogin = this.userLogin();
-     $comments = this.showComments();
-    //  $signInForm = this.signInForm();
-    //  $Container.append($Article);
-    //  $Container.append($input);
-    //  $Container.append($userLogin);
-    //  $Container.append($signInForm)
-     $Container.append($comments);
-    //  $Container.append($('.log-out'));
-     this.$el.empty().append($Container);
-     this.$el.html(this.template)
-     this.$el.append($comments)
-
-    //  this.$el.append($input);
-    //  this.$el.append($comments);
-    this.delegateEvents();
+     this.delegateEvents();
      var post = this.model.toJSON();
      post.text = this._processText(post.text)
      this.$el.html(this.template.render({post}))
      return this;
   },
-
-
-
-
-  // makeArticle: function() {
-  //   var model = this.model
-  //   var $Article = $('<div></div>');
-  //   var $title = $('<h2></h2>', {
-  //     text: this.model.get("title"),
-  //     class: "show-title"
-  //   })
-  //   var text = this._processText(this.model.get("text"))
-  //   var $body = $(text, {
-  //     class: "show-article"
-  //   })
-  //   $Article.append($title);
-  //   $Article.append($body);
-  //   return $Article;
-  // },
 
 
   _processText: function(text) {
@@ -74,42 +34,12 @@ FamiasNews.Views.PostShow = Backbone.View.extend({
   } else { return ""}
 },
 
-  // inputComment: function() {
-  //   var $input = $(
-  //        "<form>"  +
-  //           "<input name='comment_text' id='new_comment' placeholder='Nice comments here please.'>" +
-  //           "<input class='submit' type='submit' value='comment'>" +
-  //        "</input></form>")
-  //   return $input;
-  // },
-
-  // userLogin: function () {
-  //   var $login = $(
-  //                 "<div id = sign-in>" +
-  //                 "<form class=sign-in>" +
-  //                 "<label for='username'>Username:</label>" +
-  //                 "<input id='username' name='username' label='username'>" +
-  //                 "<label for='name'>Name:</label>" +
-  //                 "<input id='name' name='name' label='name'>" +
-  //                 "<label for='last_name'>Last Name:</label>" +
-  //                 "<input id='last_name' name='last_name' label='last_name'>" +
-  //                 "<label for='email'>Email:</label>" +
-  //                 "<input id='email' name='email' label='email'>" +
-  //                  "<label for='password'>Password:</label>" +
-  //                 "<input type='password' name='password' id='password'>" +
-  //                 "<input class='log-in' type='submit' value='Sign In'>" +
-  //                 "</form>" +
-  //                 "</div>");
-  //   return $login
-  // },
-
-  login: function(event) {
 // get a comments value and pass it to sendUser, following the django docs
-event.preventDefault();
-
- var formValues = $('.sign-in > input').serializeArray()
- var hash = this._toHash(formValues)
- this.sendUser(hash)
+  login: function(event) {
+    event.preventDefault();
+    var formValues = $('.sign-in > input').serializeArray()
+    var hash = this._toHash(formValues)
+    this.sendUser(hash)
   },
 
   sendUser: function(hash) {
@@ -118,7 +48,8 @@ event.preventDefault();
       type: "POST",
       data: hash,
       success: function (val) {
-        window.location.reload();
+        // window.location.reload();
+        $('.banner-group').text('hello')
       }
     })
   },
@@ -131,18 +62,7 @@ event.preventDefault();
     return hash
   },
 
-  // signInForm: function() {
-  //   $signInForm = $('<div id="sign-in">'  +
-  //               '<form class="sign">' +
-  //               '<input type="password" name="password">password</input>' +
-  //               '<input name="username">username</input>' +
-  //                '<input id="signin" type="submit">' +
-  //               '</form>' +
-  //               '</div>'
-  //             )
-  //
-  //   return $signInForm
-  // },
+
 
   signIn: function(event) {
     event.preventDefault();
@@ -183,36 +103,4 @@ event.preventDefault();
         }
       })
     },
-
-  showComments: function () {
-    var $comments = $('<ul id="comments"></ul>')
-
-    var comments = this.model.get('comments') || this.model.get('comment_list')
-    // var length = comments.length || this.model.get('length')
-    if (comments && comments.length) {
-      for (var i = 0; i <comments.length; i++ ) {
-        var $comment = $('<li></li>',{
-          text: comments[i].text
-        })
-        $comments.append($comment)
-      }
-    }
-    else if (comments && this.model.get('length')) {
-      for (var i = 0; i < this.model.get('length'); i++ ) {
-        var $comment = $('<li></li>',{
-          text: comments[i]
-        })
-        $comments.append($comment)
-    }
-  }
-    return $comments
-  },
-
-
-
-
-
-
-
-
 })

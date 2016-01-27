@@ -9,7 +9,9 @@ urlpatterns = patterns("",
     ),
     url(regex=r'^posts/(?P<pk>[0-9]+)/$',
         view=views.PostCreateReadView.as_view(),
-        name='post_detail')
+        name='post_detail'),
+    url(regex=r'^currentUser$',
+        view= views.UserCreateReadView.as_view())
 )
 
 # urlpatterns = [
