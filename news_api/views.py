@@ -37,7 +37,7 @@ class UserCreateReadView(APIView):
             user = UserSerializer(request.user)
             return Response( user.data)
         else:
-             return Response("not signed ")
+             return Response({"status": "logged out"})
 
 
 

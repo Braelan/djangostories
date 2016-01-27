@@ -7,6 +7,8 @@ window.FamiasNews = {
   initialize: function() {
     FamiasNews._ajax_setup();
     FamiasNews.posts = new FamiasNews.Collections.Posts();
+    FamiasNews.user = new FamiasNews.Models.User()
+    FamiasNews.user.fetch();
     FamiasNews.posts.fetch({
       success: function() {
         console.log("fetched posts colllection news/famiasnews.js")
@@ -15,11 +17,13 @@ window.FamiasNews = {
         console.log("failed to fetch posts collection news/famiasnews.js")
       }
     });
-    new FamiasNews.Routers.Router({$rootEl: $("span"), collection: FamiasNews.posts});
+    FamiasNews.router = new FamiasNews.Routers.Router({$rootEl: $("span"), collection: FamiasNews.posts, currentUser: FamiasNews.user});
     Backbone.history.start();
     //Backbone.history.stop(); maybe needed
 
   },
+
+
 
   // consider refactoring to a util from (docs.djangoproject.com/en/dev/ref/csrf/#ajax)
    _getCookie: function(name) {

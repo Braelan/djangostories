@@ -14,6 +14,7 @@ FamiasNews.Views.PostShow = Backbone.View.extend({
     this.listenTo(this.collection, 'sync change all', this.render)
     this.listenTo(this.model, 'sync change all', this.render)
     this.id = options.id
+    this.currentUser = options.currentUser
     this.template = new EJS({url:'show_template'})
   },
 
@@ -43,13 +44,19 @@ FamiasNews.Views.PostShow = Backbone.View.extend({
   },
 
   sendUser: function(hash) {
+    var that = this
     $.ajax({
       url:"user",
       type: "POST",
       data: hash,
       success: function (val) {
         // window.location.reload();
-        $('.banner-group').text('hello')
+        var attr = {"status": "logged in", 'username': val.username
+      }
+        window.FamiasNews.router.currentUser.set(attr)
+        window.FamiasNews.router._log()
+
+        console.log("successful login")
       }
     })
   },
