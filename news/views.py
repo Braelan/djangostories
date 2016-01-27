@@ -27,11 +27,11 @@ def post_list(request):
 def about(request):
     return render(request, 'news/about.html')
 
-# def about(request):
-#     return render(request, 'news/about.html')
-
 def index_template(request):
     return render(request, 'news/ejs/post_index.ejs')
+
+def show_template(request):
+    return render(request, 'news/ejs/post_show.ejs')
 
 def new_user(request):
     url = request.META.get('HTTP_REFERER')

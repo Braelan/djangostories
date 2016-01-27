@@ -1,0 +1,51 @@
+
+<div class="show-container">
+  <div>
+    <div>
+      <h2 class="show-title">
+          <%= post.title %>
+      </h2>
+      <p class='show-article'>
+        <%= post.text %>
+      </p>
+    </div>
+    <form>
+       <input name='comment_text' id='new_comment' placeholder='Nice comments here please.'>
+       <input class='submit' type='submit' value='comment'>
+       </input>
+    </form>
+    <ul id="comments">
+
+      <% if (typeof post.comments != "undefined") {%>
+          <% for (i = 0; i < post.comments.length; i ++) { %>
+          <li>  <%= post.comments[i].text %> </li>
+        <% } %>
+      <% } %>
+
+    </ul>
+
+    <div id = sign-in>
+    <form class=sign-in>
+    <label for='username'>Username:</label>
+    <input id='username' name='username' label='username'>
+    <label for='name'>Name:</label>
+    <input id='name' name='name' label='name'>
+    <label for='last_name'>Last Name:</label>
+    <input id='last_name' name='last_name' label='last_name'>
+    <label for='email'>Email:</label>
+    <input id='email' name='email' label='email'>
+    <label for='password'>Password:</label>
+    <input type='password' name='password' id='password'>
+    <input class='log-in' type='submit' value='Sign In'>
+    </form>
+
+    <div id="sign-in">
+                <form class="sign">
+                <input type="password" name="password">password</input>
+                <input name="username">username</input>
+                <input id="signin" type="submit">
+                </form>
+                </div>
+    </div>
+  </div>
+</div>

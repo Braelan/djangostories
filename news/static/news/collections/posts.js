@@ -27,6 +27,7 @@ FamiasNews.Collections.Posts = Backbone.Collection.extend({
     for (var i = 0; i < payload.length; i++) {
       payload[i].image = this._parse_images(payload[i])
       payload[i].authordate = this._parse_author_published_date(payload[i])
+      payload[i].text = this._processText(payload[i].text)
       }
       return payload
   },
@@ -49,6 +50,12 @@ FamiasNews.Collections.Posts = Backbone.Collection.extend({
     var authordate = "  Written by " + post.author + ' in' + published_month;
     return authordate;
   },
+  _processText: function(text) {
+    if (typeof text != "undefined") {
+    text = text.replace(/\n/g, '<br>');
+    return "hello";
+  } else { return ""}
+},
 
   _numDate: function(date) {
     var date_array = date.split("-");

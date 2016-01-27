@@ -7,17 +7,21 @@ from news.serializers import PostSerializer
 from rest_framework import views
 from rest_framework.response import Response
 from rest_framework.generics import ListCreateAPIView
+from rest_framework.generics import RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from news.models import Post
 from news.models import Comment
 
-class PostCreateReadView(ListCreateAPIView):
+class PostsCreateReadView(ListCreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = (IsAuthenticatedOrReadOnly,)
 
 
-
+class PostCreateReadView(RetrieveUpdateDestroyAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    permission_classes =(IsAuthenticatedOrReadOnly,)
 
 def get_post(request, pk):
     post = get_object_or_404(Post.objects.all(), pk=pk)
@@ -30,7 +34,6 @@ def get_post(request, pk):
                     published_date=post.published_date,
                     comment_list = comments,
                     length = length,
-
                    )
     return JsonResponse(postprejson)
 
