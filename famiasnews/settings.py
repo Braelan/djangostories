@@ -61,36 +61,25 @@ WSGI_APPLICATION = 'famiasnews.wsgi.application'
 #
 DATABASES = {
 
-        # 'default': {
-        #     'ENGINE': 'django.db.backends.mysql',
-        #     'NAME': 'famia$newsdb',
-        #     'USER': 'famia',
-        #     'PASSWORD': 'booker',
-        #     'HOST': 'mysql.server',
-        # },
-       'default': {
-          'ENGINE': 'django.db.backends.mysql',
-          'NAME': 'newsdb',
-           'USER': 'root',
-           'PASSWORD': 'booker',
-           'HOST': '',
-           'PORT': '',
-               },
-<<<<<<< HEAD
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'famia$newsdb',
+            'USER': 'famia',
+            'PASSWORD': 'booker',
+            'HOST': 'mysql.server',
+        },
+    #    'default': {
+    #       'ENGINE': 'django.db.backends.mysql',
+    #       'NAME': 'newsdb',
+    #        'USER': 'root',
+    #        'PASSWORD': 'booker',
+    #        'HOST': '',
+    #        'PORT': '',
+    #            },
 
-          }
-=======
             }
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-    'rest_framework.authentication.BasicAuthentication',
-    'rest_framework.authentication.SessionAuthentication'
-    )
 
-
-}
->>>>>>> addUsers
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
