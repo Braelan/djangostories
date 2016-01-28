@@ -53,7 +53,7 @@ FamiasNews.Collections.Posts = Backbone.Collection.extend({
   _processText: function(text) {
     if (typeof text != "undefined") {
     text = text.replace(/\n/g, '<br>');
-    return "hello";
+    return text;
   } else { return ""}
 },
 

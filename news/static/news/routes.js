@@ -31,7 +31,24 @@ FamiasNews.Routers.Router = Backbone.Router.extend({
 
   _log: function(){
     if (this.currentUser.escape('status') !== "logged out"){
-    $('.banner-group').text('logged in as:' + this.currentUser.escape('username'))
+    $('.email').html('logged in as: ' + this.currentUser.escape('username') +
+    '<button id="logout" class="log-out" type="button" name="button">log out</button>'+
+    this._logout() )
   }
   },
+
+  _logout: function() {
+    return '<script type="text/javascript">'+
+      '$("button").click(function() {'+
+      '  $.ajax({'+
+      '    url: "user",'+
+      '    type: "GET",'+
+      '    success: function(data) {'+
+      '      window.location.reload();'+
+      '    }'+
+      '  }'+
+      '  )'+
+      '})'+
+    '</script>'
+  }
 })
