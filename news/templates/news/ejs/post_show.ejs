@@ -1,0 +1,68 @@
+<div id="sign-in">
+  <div class=sign-in-container >
+      <form class="sign">
+      <input placeholder="password" type="password" name="password"></input>
+      <input placeholder="username"name="username"></input>
+      <input id="signin" type="submit" value="Sign In">
+      <br>
+      </form>
+
+      <p class="anonymous"> or</p>
+      <button class="anonymous" type="button" name="button">->Post Anonymously</button>
+
+      <button class="create" type="button" name="button">->Create Account</button>
+  </div>
+  <div class="background">
+
+  </div>
+</div>
+
+
+
+<div class="show-container">
+  <div>
+    <div>
+      <h2 class="show-title">
+          <%= post.title %>
+      </h2>
+      <p class='show-article'>
+        <%= post.text %>
+      </p>
+    </div>
+    <form>
+       <input name='comment_text' id='new_comment' placeholder='midnight somewhere'>
+       <input class='submit' type='submit' value='comment'>
+       </input>
+    </form>
+    <ul id="comments">
+
+      <% if (typeof post.comments != "undefined") {%>
+          <% for (i = 0; i < post.comments.length; i ++) { %>
+          <li>  <%= post.comments[i].text %> </li>
+        <% } %>
+      <% } %>
+
+    </ul>
+
+ <div class="sign-up-container sign-in">
+    <form class=sign-in>
+      <div class="create-container">
+        <input placeholder="Username"id='username' name='username' label='username'>
+        <input placeholder="name" id='name' name='name' label='name'>
+        <input placeholder="last name" id='last_name' name='last_name' label='last_name'>
+        <input placeholder="email" id='email' name='email' label='email'>
+        <input placeholder="password" type='password' name='password' id='password'>
+        <input class='log-in' type='submit' value='Create Account'>
+      </div>
+    </form>
+    <div class="background">
+
+    </div>
+
+   </div>
+
+
+
+    </div>
+  </div>
+</div>

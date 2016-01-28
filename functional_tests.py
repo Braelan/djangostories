@@ -5,6 +5,7 @@ from selenium.webdriver.common.keys import Keys
 
 class NewVisitorTest(unittest.TestCase):
     def setUp(self):
+
         self.browser = webdriver.Firefox()
         self.browser.implicitly_wait(3)
 
@@ -45,6 +46,17 @@ class NewVisitorTest(unittest.TestCase):
         #writes in a comment and sends it
         inputbox.send_keys('I never knew that about whales')
         inputbox.send_keys(Keys.ENTER)
+
+        # a sign in dialogue appears
+        signin = self.browser.find_element_by_id('username')
+        password = self.browser.find_element_by_id('password')
+
+        # fill in the box with braelan/ booker and send the signin
+
+        signin.send_keys('username')
+        password.send_keys('password')
+
+
         #can see the comment has appeared on the screen
         ul = self.browser.find_element_by_id('comments')
         lis = self.browser.find_elements_by_tag_name('li')

@@ -16,4 +16,5 @@ urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/' , include('news_api.urls')),
     url(r'^about', include('news.urls'), name='about_page'),
+    url(r'^index_template', include('news.urls'))
 ]

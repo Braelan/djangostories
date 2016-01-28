@@ -1,0 +1,79 @@
+.sign-in {
+  background: red;
+  display: none;
+  flex-direction: column;
+ width: 400px;
+ margin: auto;
+ border: 1px solid gray;
+}
+
+#sign-in {
+  display: none;
+  width: 1024px;
+  height: 100%;
+  background: yellow;
+  /*position: absolute;*/
+  z-index: 20;
+
+}
+.background {
+  width: 1024px;
+  height: 2000px;
+  background: black;
+  position: absolute;
+  z-index: 1;
+  opacity: .75;
+}
+#signin:hover{
+  cursor: pointer;
+
+}
+#signin {
+  border-bottom: 0;
+  display: block;
+  width: 94px;
+  background: #1C547E;
+  border-radius: 10px;
+  padding: 2px;
+  margin: 10px;
+}
+#sign-in > .sign-in-container {
+  margin: 200px 300px;
+  top: 10%;
+  width: 500px;
+  opacity: 2;
+  background: white;
+  position: absolute;
+  z-index:3;
+  display: flex;
+  flex-direction: column;
+  border: 3px solid blue;
+  border-radius: 10px;
+}
+.anonymous, .create {
+  width: 40%;
+  margin: 10px auto;
+  font-size: 14px;
+
+}
+
+.sign {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  margin: 10px auto;
+  border-bottom: 2px solid #B6B6B6;
+}
+
+
+#username{
+ order: 1;
+}
+
+#password{
+order: 2;
+}
+
+#sign-in > .on {
+  display: flex;
+}

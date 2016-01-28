@@ -1,52 +1,31 @@
 FamiasNews.Views.PostShow = Backbone.View.extend({
-  tagName: "form",
+  // tagName: "form",
   events: {
-    "click .submit" : "submit"
+    "click .submit" : "submit",
+    "click .log-in"  : "login",
+    "click .logout" : "logout",
+    "click #signin" : "signIn",
+    "click .anonymous": "anonymous",
+    "click .create": "displayCreate"
   },
 
   initialize: function(options) {
+    post = new FamiasNews.Models.Post({id: options.model_id})
     this.model = options.model
     this.collection = options.collection
     this.listenTo(this.collection, 'sync change all', this.render)
     this.listenTo(this.model, 'sync change all', this.render)
     this.id = options.id
-    // this.$el = $("<div></div>",
-    //               {class: "show-container"})
+    this.currentUser = options.currentUser
+    this.template = new EJS({url:'show_template'})
   },
 
   render: function() {
-     $Container = $("<div></div>",
-                   {class: "show-container"});
-     $Article = this.makeArticle();
-     $input = this.inputComment();
-     $comments = this.showComments();
-     $Container.append($Article);
-     $Container.append($input);
-     $Container.append($comments);
-     this.$el.empty().append($Container);
-    //  this.$el.append($input);
-    //  this.$el.append($comments);
-
+     this.delegateEvents();
+     var post = this.model.toJSON();
+     post.text = this._processText(post.text)
+     this.$el.html(this.template.render({post}))
      return this;
-  },
-
-
-
-
-  makeArticle: function() {
-    var model = this.model
-    var $Article = $('<div></div>');
-    var $title = $('<h2></h2>', {
-      text: this.model.get("title"),
-      class: "show-title"
-    })
-    var text = this._processText(this.model.get("text"))
-    var $body = $(text, {
-      class: "show-article"
-    })
-    $Article.append($title);
-    $Article.append($body);
-    return $Article;
   },
 
 
@@ -57,15 +36,72 @@ FamiasNews.Views.PostShow = Backbone.View.extend({
     return text;
   } else { return ""}
 },
-
-  inputComment: function() {
-    var $input = $(
-         "<form>"  +
-            "<input name='comment_text' id='new_comment' placeholder='Nice comments here please.'>" +
-            "<input class='submit' type='submit' value='comment'>" +
-         "</input></form>")
-    return $input;
+  hideCreate:function() {
+    $('.sign-in').css('display', 'none')
   },
+  displayCreate: function(){
+    $('.sign-in').css('display', 'block')
+    this._hideLogin();
+  },
+
+  _displayLogin: function(comment, id) {
+    $('#sign-in').css('display', 'block')
+    this.comment = new FamiasNews.Models.Comment({"body": comment, "id": id})
+  },
+  _hideLogin: function(comment, id) {
+    $('#sign-in').css('display', 'none')
+  },
+
+
+
+// get a comments value and pass it to sendUser, following the django docs
+  login: function(event) {
+    event.preventDefault();
+    var formValues = $('.sign-in > input').serializeArray()
+    var hash = this._toHash(formValues)
+    this.sendUser(hash)
+    this.hideCreate();
+    this._sendSavedComment()
+  },
+
+  sendUser: function(hash) {
+    var that = this
+    $.ajax({
+      url:"user",
+      type: "POST",
+      data: hash,
+      success: function (val) {
+        // window.location.reload();
+        var attr = {"status": "logged in", 'username': val.username
+      }
+        window.FamiasNews.router.currentUser.set(attr)
+        window.FamiasNews.router._log()
+
+        console.log("successful login")
+      }
+    })
+  },
+
+  _toHash: function(array) {
+    var hash = {}
+    for (var i = 0; i < array.length; i++) {
+      hash[array[i].name] = array[i].value
+    }
+    return hash
+  },
+
+
+
+  signIn: function(event) {
+    event.preventDefault();
+    var formValues = $('.sign > input').serializeArray()
+    var hash = this._toHash(formValues)
+    hash['login'] = 'true';
+    this.sendUser(hash)
+    this._hideLogin();
+    this._sendSavedComment();
+  },
+
 
   //comments are going to be sent via jquery ajax.  They will be saved at views.py.
   // then they will be serialized along with posts and sent to the posts api, parsed
@@ -76,10 +112,33 @@ FamiasNews.Views.PostShow = Backbone.View.extend({
       var comment = $('#new_comment').val();
       var id = this.model.id
       var that = this;
+      $('form.sign-in').toggleClass('on');
+      this._commentFlow(comment, id, that);
+      // this.sendComment(comment, id, that);
+
+    },
+
+// handle how the sign in displays and when a comment is sent
+    _commentFlow: function(comment, id, that) {
+      if (this._isSignedIn()) {
+        this.sendComment(comment, id, that);
+      }else {
+        this._displayLogin(comment, id);
+      }
+    },
+
+    _isSignedIn: function (){
+      return (window.FamiasNews.router.currentUser.escape('status') !== "logged out")
+    },
+
+
+
+    sendComment: function (comment, id, that) {
+      postid = Backbone.history.getFragment().split("/")[1]
       $.ajax({
         url: "/",
         type: "POST",
-        data: {comment_text: comment, post_id: id},
+        data: {comment_text: comment, post_id: postid},
         success: function()  {
           that.model.fetch();
           that.collection.fetch()
@@ -89,33 +148,17 @@ FamiasNews.Views.PostShow = Backbone.View.extend({
           console.log("Ajax oops")
         }
       })
-
-
     },
-
-  showComments: function () {
-    var $comments = $('<ul id="comments"></ul>')
-
-    var comments = this.model.get('comments') || this.model.get('comment_list')
-    // var length = comments.length || this.model.get('length')
-    if (comments && comments.length) {
-      for (var i = 0; i <comments.length; i++ ) {
-        var $comment = $('<li></li>',{
-          text: comments[i].text
-        })
-        $comments.append($comment)
+    _sendSavedComment: function(){
+      if(this.comment !== "undefined") {
+        this.sendComment(this.comment.escape('body'), this.comment.escape('id'), this)
+        this.comment = "undefined"
       }
+    },
+    anonymous: function() {
+      this._sendSavedComment();
+      $('#sign-in').css('display', 'none')
     }
-    else if (comments && this.model.get('length')) {
-      for (var i = 0; i < this.model.get('length'); i++ ) {
-        var $comment = $('<li></li>',{
-          text: comments[i]
-        })
-        $comments.append($comment)
-    }
-  }
-    return $comments
-  },
 
 
 })

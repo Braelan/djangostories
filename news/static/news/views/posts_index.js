@@ -1,100 +1,17 @@
 FamiasNews.Views.PostsIndex = Backbone.View.extend({
-  // template: JST["news/index.html"],
 
   initialize: function(options) {
     this.collection = options.collection;
     this.listenTo(this.collection, "sync", this.render)
-    this.$el = $("<div></div>",
-                  {class: "container"})
+    this.template = new EJS({url: 'index_template'})
   },
 
   render: function() {
-    // can place a sort function here
-    // var view = this.template({questions: this.collection});
-
-    //this injects into the span element as set in famiasnews.js $root and
-    //displayed in base.html
-
-    var $index = $("<ul></ul>")
     var posts = this.collection;
     posts.sort(posts.comparator);
-
-    if (posts.length > 0 && $("a").length < 3) {
-      posts.each( function(post){
-        var $post = $('<div></div', {
-          "class": "post"
-        });
-        if (post.escape("author") != "Null") {
-        $image = this._create_image(post);
-        $title = this._create_link(post);
-        $date = this._create_author_published_date(post);
-        $subtitle = this._create_subtitle(post);
-        $post.append($title);
-        if ($image != "undefined") {
-          $post.append($image);
-        }
-        $post.append($date)
-        $post.append($subtitle);
-        this.$el.append($post);
-
-      }
-      }.bind(this))
-    }
-
+    var posts = this.collection.toJSON();
+    this.$el.html(this.template.render({posts}))
     return this;
   },
-
-//create an about page link
-  _about: function() {
-    var $a = $("<a></a>")
-    $a.text('about');
-    $a.attr('href', 'about.html');
-    return $a;
-  },
-  // create a link for use as the post title in render
-  _create_link: function (post) {
-    var $li = $("<a></a>");
-    $li.text(post.get("title"));
-    link = '#posts/' + post.escape("id");
-    $li.attr('href', link);
-    return $li;
-  },
-  // create the body of the post as a <p>
-  _create_subtitle: function (post) {
-    $subtitle = $('<p></p>', {
-                  text: post.get("subtitle")
-    })
-    return $subtitle;
-
-  },
-
-  _create_author_published_date: function (post) {
-      var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
-                      "August", "September", "October", "November", "December"]
-      var text = post.escape("published_date");
-
-      var groups = text.split("-");
-      var published_month = " " + months[parseInt(groups[1]) - 1] + " " + groups[0];
-      var authordate = "  Written by " + post.escape("author") + ' in' + published_month;
-
-    $authordate = $('<p></p>', {
-                    text: authordate,
-                    class: "author"
-    });
-    return $authordate;
-  },
-
-  _create_image: function (post) {
-    if (post.escape("image").length > 0) {
-      var url = post.escape("image").split("/");
-      var imageurl = "static".concat("/", url[4],"/", url[5]);
-      $image = $("<img></img>", {
-        src: imageurl
-      });
-      return $image;
-    } else
-      return undefined;
-
-  }
 
 })

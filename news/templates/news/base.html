@@ -5,9 +5,12 @@
     <script src="{%static 'libs/jquery.js'%}"></script>
     <script src="{%static 'libs/underscore.js'%}"></script>
     <script src="{%static 'libs/backbone.js'%}"></script>
+    <script src="{%static 'libs/ejs_production.js'%}"></script>
 
     <script src="{%static 'news/famiasnews.js'%}"></script>
     <script src="{%static 'news/models/post.js'%}"></script>
+    <script src="{%static 'news/models/current_user.js'%}"></script>
+    <script src="{%static 'news/models/current_comment.js'%}"></script>
     <script src="{%static 'news/collections/posts.js'%}"></script>
     <script src="{%static 'news/utils.js'%}"></script>
     <script src="{%static 'news/views/post_show.js'%}"></script>
@@ -30,10 +33,13 @@
     <a id='about' href="/about">about</a><a id='about' href="/">home</a>
   </section>
   </section>
+
+  {% block content %}
+
+  {% endblock %}
+
 </header>
 <body>
- {% block content %}
- {% endblock %}
 
 <span></span>
 <script type="text/javascript">

@@ -18,3 +18,9 @@ class PostSerializer(serializers.Serializer):
     published_date = serializers.DateTimeField(format = None, input_formats = None)
     # comments = serializers.StringRelatedField(many=True)
     comments = CommentSerializer(many=True, read_only=True)
+
+class UserSerializer(serializers.Serializer):
+    email = serializers.StringRelatedField()
+    first_name =serializers.StringRelatedField()
+    last_name = serializers.StringRelatedField()
+    username = serializers.StringRelatedField()

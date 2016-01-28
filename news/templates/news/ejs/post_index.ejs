@@ -1,0 +1,18 @@
+
+<div class="container">
+
+
+<% for (i= 0; i < posts.length; i ++) {%>
+  <div class="post">
+    <a href=<%='#posts/' + posts[i].id%>> <%=posts[i].title %> </a>
+    <img src=<%= posts[i].image %> />
+    <p class="author">
+      <%= posts[i].authordate %>
+    </p>
+    <p>
+      <%= posts[i].subtitle %>
+    </p>
+  </div>
+<% } %>
+
+</div>

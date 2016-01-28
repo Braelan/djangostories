@@ -3,43 +3,42 @@ from django.shortcuts import get_list_or_404
 from django.core.urlresolvers import reverse
 from django.shortcuts import render
 from django.http import JsonResponse
+from django.contrib.auth.models import User
+from django.contrib.sessions.models import Session
 from news.serializers import PostSerializer
+from news.serializers import UserSerializer
 from rest_framework import views
+from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.generics import ListCreateAPIView
+from rest_framework.generics import RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework import authentication
 from news.models import Post
 from news.models import Comment
 
-class PostCreateReadView(ListCreateAPIView):
+
+class PostsCreateReadView(ListCreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = (IsAuthenticatedOrReadOnly,)
 
 
+class PostCreateReadView(RetrieveUpdateDestroyAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    permission_classes =(IsAuthenticatedOrReadOnly,)
 
+class UserCreateReadView(APIView):
+    def get(self, request):
 
-def get_post(request, pk):
-    post = get_object_or_404(Post.objects.all(), pk=pk)
-    comments, length = comments_dict(post.comments.all())
-    string = {'check1': "check2"}
-    postprejson = dict(id= post.id, title=post.title,
-                       text=post.text,
-                    author=post.author.username,
-                    created_date = post.created_date,
-                    published_date=post.published_date,
-                    comment_list = comments,
-                    length = length
-                   )
-    return JsonResponse(postprejson)
+        if request.user.is_authenticated():
+            print request.user.is_authenticated()
+            user = UserSerializer(request.user)
+            return Response( user.data)
+        else:
+             return Response({"status": "logged out"})
 
-def comments_dict(comments):
-  list = {};
-  count = 0
-  for idx, comment in enumerate(comments):
-      list[idx] = comment.text
-      count = count + 1
-  return list, count
 
 
 
