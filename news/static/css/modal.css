@@ -1,11 +1,19 @@
 .sign-in {
   background: red;
-  display: none;
+  display: static;
   flex-direction: column;
  width: 400px;
  margin: auto;
  border: 1px solid gray;
 }
+
+.sign-up-container {
+  display: static;
+}
+.sign-in {
+  display: static;
+}
+
 
 #sign-in {
   display: none;
