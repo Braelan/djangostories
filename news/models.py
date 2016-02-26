@@ -32,8 +32,9 @@ class Post(models.Model):
 @receiver(post_delete, sender=Post)
 def news_post_delete_handler(sender, **kwargs):
       Post = kwargs['instance']
-      storage, path = Post.image.storage, Post.image.path
-      storage.delete(path)
+      if Post.image:
+        storage, path = Post.image.storage, Post.image.path
+        storage.delete(path)
 
 
 class Comment(models.Model):
