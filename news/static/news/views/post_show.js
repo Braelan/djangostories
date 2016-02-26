@@ -40,7 +40,7 @@ FamiasNews.Views.PostShow = Backbone.View.extend({
     $('.sign-in').css('display', 'none')
   },
   displayCreate: function(){
-    $('.sign-in').css('display', 'block')
+    $('.sign-up-container').css('display', 'block')
     this._hideLogin();
   },
 
